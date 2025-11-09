@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-ENHANCED INTRUSION DETECTION SYSTEM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2D3250;
+            --secondary: #424769;
+            --accent: #7077A1;
+            --light: #F6B17A;
+            --error: #ff4757;
+            --success: #2ed573;
+            --input-bg: rgba(112, 119, 161, 0.1);
+            --card-bg: rgba(66, 71, 105, 0.2);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--light) 0%, #FFD1A1 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--light);
+            font-weight: 500;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        input {
+            width: 100%;
+            padding: 1rem;
+            background: var(--input-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--light);
+            box-shadow: 0 0 0 3px rgba(246, 177, 122, 0.1);
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--light);
+            opacity: 0.5;
+        }
+
+        .tooltip {
+            position: absolute;
+            right: -10px;
+            top: 0;
+            font-size: 1rem;
+            color: var(--light);
+            cursor: help;
+        }
+
+        .tooltip:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            right: 24px;
+            top: -5px;
+            background: var(--secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            z-index: 1;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+
+        button {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--light) 0%, #FFD1A1 100%);
+            color: var(--primary);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--light);
+            color: var(--light);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .nav-link {
+            color: var(--light);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link:hover {
+            background: var(--input-bg);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            <i class="fas fa-shield-alt"></i>
+            AI-ENHANCED INTRUSION DETECTION SYSTEM
+        </h1>
+        
+        <form action="/predict" method="post">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="Machine">Machine Architecture</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="Machine" name="Machine" required 
+                               placeholder="Enter machine code">
+                        <i class="fas fa-microchip input-icon"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="DebugSize">Debug Size</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="DebugSize" name="DebugSize" required 
+                               placeholder="Enter debug size">
+                        <i class="fas fa-bug input-icon"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="MajorImageVersion">Major Image Version</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="MajorImageVersion" name="MajorImageVersion" required 
+                               placeholder="Enter version number">
+                        <i class="fas fa-code-branch input-icon"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="ExportSize">Export Size</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="ExportSize" name="ExportSize" required 
+                               placeholder="Enter export size">
+                        <i class="fas fa-file-export input-icon"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="IatVRA">IAT Virtual Address</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="IatVRA" name="IatVRA" required 
+                               placeholder="Enter IAT address">
+                        <i class="fas fa-memory input-icon"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="NumberOfSections">Number of Sections</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="NumberOfSections" name="NumberOfSections" required 
+                               placeholder="Enter section count">
+                        <i class="fas fa-layer-group input-icon"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="SizeOfStackReserve">Stack Reserve Size</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="SizeOfStackReserve" name="SizeOfStackReserve" required 
+                               placeholder="Enter stack size">
+                        <i class="fas fa-database input-icon"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="DllCharacteristics">DLL Characteristics</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="DllCharacteristics" name="DllCharacteristics" required 
+                               placeholder="Enter DLL characteristics">
+                        <i class="fas fa-cogs input-icon"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="ResourceSize">Resource Size</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="ResourceSize" name="ResourceSize" required 
+                               placeholder="Enter resource size">
+                        <i class="fas fa-folder-open input-icon"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="BitcoinAddresses">Bitcoin Addresses</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="BitcoinAddresses" name="BitcoinAddresses" required 
+                               placeholder="Enter number of addresses">
+                        <i class="fab fa-bitcoin input-icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn-primary">
+                    <i class="fas fa-shield-alt"></i>
+                    Analyze Threat
+                </button>
+                <button type="reset" class="btn-secondary">
+                    <i class="fas fa-undo"></i>
+                    Reset
+                </button>
+            </div>
+        </form>
+
+        <div class="navigation">
+            <a href="/" class="nav-link">
+                <i class="fas fa-home"></i>
+                Back to Home
+            </a>
+            <a href="/chat" class="nav-link">
+                <i class="fas fa-comments"></i>
+                Chat Support
+            </a>
+        </div>
+    </div>
+</body>
+</html>

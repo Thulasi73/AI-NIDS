@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-ENHANCED INTRUSION DETECTION SYSTEM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2D3250;
+            --secondary: #424769;
+            --accent: #7077A1;
+            --light: #F6B17A;
+            --success: #2ed573;
+            --warning: #ffa502;
+            --danger: #ff4757;
+            --card-bg: rgba(66, 71, 105, 0.2);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .result-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--light) 0%, #FFD1A1 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .prediction-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--light);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--light) 0%, #FFD1A1 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .analysis-section {
+            margin-top: 2rem;
+        }
+
+        .analysis-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--light);
+        }
+
+        .analysis-content {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+        }
+
+        .analysis-content p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .confidence-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--success), var(--light));
+            border-radius: 4px;
+            transition: width 1s ease-out;
+        }
+
+        .navigation {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+
+        .nav-link {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-primary {
+            background: linear-gradient(135deg, var(--light) 0%, #FFD1A1 100%);
+            color: var(--primary);
+        }
+
+        .nav-secondary {
+            background: rgba(246, 177, 122, 0.1);
+            border: 2px solid rgba(246, 177, 122, 0.3);
+            color: var(--light);
+        }
+
+        .nav-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .prediction-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .navigation {
+                flex-direction: column;
+            }
+
+            .nav-link {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            <i class="fas fa-shield-alt"></i>
+            Threat Analysis Result
+        </h1>
+
+        <div class="result-card">
+            <div class="prediction-summary">
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="metric-label">Prediction</div>
+                    <div class="metric-value" style="color: {% if prediction == 'Malicious' %}var(--danger){% else %}var(--success){% endif %}">
+                        {{ prediction }}
+                    </div>
+                </div>
+
+                {% if confidence is not none %}
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="metric-label">Confidence Score</div>
+                    <div class="metric-value">{{ "%.1f"|format(confidence * 100) }}%</div>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" style="width: {{ confidence * 100 }}%"></div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="analysis-section">
+                <h2>
+                    <i class="fas fa-brain"></i>
+                    AI Analysis
+                </h2>
+                <div class="analysis-content">
+                    <p>{{ gpt_response }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <a href="/predict" class="nav-link nav-primary">
+                <i class="fas fa-redo"></i>
+                New Analysis
+            </a>
+            <a href="/chat" class="nav-link nav-secondary">
+                <i class="fas fa-comments"></i>
+                Chat Support
+            </a>
+            <a href="/" class="nav-link nav-secondary">
+                <i class="fas fa-home"></i>
+                Home
+            </a>
+        </div>
+    </div>
+</body>
+</html>
